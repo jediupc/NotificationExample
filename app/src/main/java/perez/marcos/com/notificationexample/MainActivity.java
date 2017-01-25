@@ -37,7 +37,7 @@ public class MainActivity extends ActionBarActivity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Entero que nos permite identificar la notificación
+                //Entero que nos permite identificar la notificaciÃ³n
                 int mId = 1;
                 //Instanciamos Notification Manager
                 NotificationManager mNotificationManager =
@@ -49,25 +49,25 @@ public class MainActivity extends ActionBarActivity {
                 NotificationCompat.Builder mBuilder =
                         new NotificationCompat.Builder(getApplicationContext())
                         .setSmallIcon(R.drawable.ic_launcher)
-                        .setContentTitle("Título")
+                        .setContentTitle("TÃ­tulo")
                         .setContentText("Texto de contenido");
 
 
-                // Creamos un intent explicito, para abrir la app desde nuestra notificación
+                // Creamos un intent explicito, para abrir la app desde nuestra notificaciÃ³n
                 Intent resultIntent = new Intent(getApplicationContext(), ResultActivity.class);
 
                 //El objeto stack builder contiene una pila artificial para la Acitivty empezada.
-                //De esta manera, aseguramos que al navegar hacia atrás
+                //De esta manera, aseguramos que al navegar hacia atrÃ¡s
                 //desde la Activity nos lleve a la home screen.
 
                 //Desde donde la creamos
                 TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
-                // Añade la pila para el Intent,pero no el intent en sí
+                // AÃ±ade la pila para el Intent,pero no el intent en sÃ­
                 stackBuilder.addParentStack(ResultActivity.class);
-                // Añadimos el intent que empieza la activity que está en el top de la pila
+                // AÃ±adimos el intent que empieza la activity que estÃ¡ en el top de la pila
                 stackBuilder.addNextIntent(resultIntent);
 
-                //El pending intent será el que se ejecute cuando la notificación sea pulsada
+                //El pending intent serÃ¡ el que se ejecute cuando la notificaciÃ³n sea pulsada
                 PendingIntent resultPendingIntent =
                         stackBuilder.getPendingIntent(
                                 0,
@@ -84,7 +84,7 @@ public class MainActivity extends ActionBarActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Creamos una notificación toast
+                //Creamos una notificaciÃ³n toast
                 //Tenemos que llamar a getApplication context ya que "this" -->
                 Toast.makeText(getApplicationContext(), "Soy un toast y sabes implementarme",Toast.LENGTH_LONG).show();
             }
@@ -93,7 +93,7 @@ public class MainActivity extends ActionBarActivity {
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Creamos una notificación snackbar
+                //Creamos una notificaciÃ³n snackbar
                 // parentLayout: ViewGroup donde lo queremos mostrar
                 // R.string.snackbar_text texto a mostrar definido en strings.xml
                 View.OnClickListener myOnClickListener = new View.OnClickListener() {
@@ -114,7 +114,7 @@ public class MainActivity extends ActionBarActivity {
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Entero que nos permite identificar la notificación
+                //Entero que nos permite identificar la notificaciÃ³n
                 int mId = 2;
                 //Instanciamos Notification Manager
                 NotificationManager mNotificationManager =
@@ -126,14 +126,14 @@ public class MainActivity extends ActionBarActivity {
                 NotificationCompat.Builder mBuilder =
                         new NotificationCompat.Builder(getApplicationContext())
                                 .setSmallIcon(R.drawable.ic_launcher)
-                                .setContentTitle("Título")
+                                .setContentTitle("TÃ­tulo")
                                 .setContentText("Texto de contenido");
 
-                // Creamos un intent explicito, para abrir la app desde nuestra notificación
+                // Creamos un intent explicito, para abrir la app desde nuestra notificaciï¿½n
                 Intent resultIntent = new Intent(getApplicationContext(), ResultActivity.class);
 
                 //El objeto stack builder contiene una pila artificial para la Acitivty empezada.
-                //De esta manera, aseguramos que al navegar hacia atrás
+                //De esta manera, aseguramos que al navegar hacia atrï¿½s
                 //desde la Activity nos lleve a la home screen.
 
                 TaskStackBuilder stackBuilder2 = TaskStackBuilder.create(getApplicationContext());
@@ -142,7 +142,7 @@ public class MainActivity extends ActionBarActivity {
                 // Adds the Intent that starts the Activity to the top of the stack
                 stackBuilder2.addNextIntent(resultIntent);
 
-                //El pending intent será el que se ejecute cuando la notificación sea pulsada
+                //El pending intent serÃ¡ el que se ejecute cuando la notificaciÃ³n sea pulsada
                 PendingIntent resultPendingIntent =
                         stackBuilder2.getPendingIntent(
                                 1,
