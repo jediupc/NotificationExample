@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NotificationCompat;
@@ -121,42 +122,54 @@ public class MainActivity extends ActionBarActivity {
                         (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
 
+                // Creamos un intent explicito, para abrir la app desde nuestra notificaci�n
+                Intent resultIntent = new Intent(getApplicationContext(), ResultActivity.class);
+
+                //El pending intent será el que se ejecute cuando la notificación sea pulsada
+                PendingIntent resultPendingIntent =
+                        PendingIntent.getActivity(
+                                getApplicationContext(),
+                                1,
+                                resultIntent,
+                                PendingIntent.FLAG_UPDATE_CURRENT
+                        );
+
+
                 // Para la notificaciones, en lugar de crearlas directamente, lo hacemos mediante
                 // un Builder/contructor.
                 NotificationCompat.Builder mBuilder =
                         new NotificationCompat.Builder(getApplicationContext())
                                 .setSmallIcon(R.drawable.ic_launcher)
+                                .addAction(R.drawable.ic_launcher, "Accion 1", resultPendingIntent) // #0
+                                .addAction(R.drawable.ic_launcher, "Accion 2", resultPendingIntent)  // #1
                                 .setContentTitle("Título")
                                 .setContentText("Texto de contenido");
 
-                // Creamos un intent explicito, para abrir la app desde nuestra notificaci�n
-                Intent resultIntent = new Intent(getApplicationContext(), ResultActivity.class);
+                NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
+                bigTextStyle.setBigContentTitle("BigContentTitle");
+                bigTextStyle.setSummaryText("Resumen, lalalalalalala");
+                bigTextStyle.bigText(getString(R.string.loremIpsum));
 
-                //El objeto stack builder contiene una pila artificial para la Acitivty empezada.
-                //De esta manera, aseguramos que al navegar hacia atr�s
-                //desde la Activity nos lleve a la home screen.
+                mBuilder.setStyle(bigTextStyle);
 
-                TaskStackBuilder stackBuilder2 = TaskStackBuilder.create(getApplicationContext());
-                // Adds the back stack for the Intent (but not the Intent itself)
-                stackBuilder2.addParentStack(ResultActivity.class);
-                // Adds the Intent that starts the Activity to the top of the stack
-                stackBuilder2.addNextIntent(resultIntent);
 
-                //El pending intent será el que se ejecute cuando la notificación sea pulsada
-                PendingIntent resultPendingIntent =
-                        stackBuilder2.getPendingIntent(
-                                1,
-                                PendingIntent.FLAG_UPDATE_CURRENT
-                        );
                 mBuilder.setContentIntent(resultPendingIntent);
+
 
                 // mId nos permite actualizar las notificaciones en un futuro
                 // Notificamos
                 Notification noti = mBuilder.build();
+
+                //O patrón de vibración propio
+                long [] vibrate = {500,110,500,110,450,110,200,110,170,40,450,110,200,110,170,40,500};
+
+                noti.vibrate = vibrate;
+
+                noti.color = Color.CYAN;
+
                 noti.flags |= Notification.FLAG_INSISTENT;
                 noti.flags |= Notification.FLAG_NO_CLEAR;
                 noti.flags |= Notification.FLAG_SHOW_LIGHTS;
-                noti.flags |= Notification.FLAG_NO_CLEAR;
                 mNotificationManager.notify(mId, noti);
             }
         });

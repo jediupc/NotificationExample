@@ -6,4 +6,5 @@
     <string name="title_activity_result">ResultActivity</string>
     <string name="snackbar_text">ESTÁS SEGURO DE QUE QUIERES HACER ESTO?</string>
     <string name="snackbar_action">YESSSSS</string>
+    <string name="loremIpsum">Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum</string>
 </resources>
