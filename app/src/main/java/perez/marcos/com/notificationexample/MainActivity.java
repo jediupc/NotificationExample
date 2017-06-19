@@ -6,11 +6,13 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,8 +20,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 
-public class MainActivity extends ActionBarActivity {
-    Button b,b1,b2,b3;
+public class MainActivity extends AppCompatActivity {
+    Button b, b1, b2, b3;
 
     View layout;
 
@@ -30,8 +32,8 @@ public class MainActivity extends ActionBarActivity {
 
         b = (Button) findViewById(R.id.button);
         b1 = (Button) findViewById(R.id.button1);
-        b2 =(Button) findViewById(R.id.button2);
-        b3 =(Button) findViewById(R.id.button3);
+        b2 = (Button) findViewById(R.id.button2);
+        b3 = (Button) findViewById(R.id.button3);
 
         layout = findViewById(R.id.layout);
 
@@ -49,9 +51,9 @@ public class MainActivity extends ActionBarActivity {
                 // un Builder/contructor.
                 NotificationCompat.Builder mBuilder =
                         new NotificationCompat.Builder(getApplicationContext())
-                        .setSmallIcon(R.drawable.ic_launcher)
-                        .setContentTitle("Título")
-                        .setContentText("Texto de contenido");
+                                .setSmallIcon(R.drawable.ic_launcher)
+                                .setContentTitle("Título")
+                                .setContentText("Texto de contenido");
 
 
                 // Creamos un intent explicito, para abrir la app desde nuestra notificación
@@ -87,7 +89,7 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 //Creamos una notificación toast
                 //Tenemos que llamar a getApplication context ya que "this" -->
-                Toast.makeText(getApplicationContext(), "Soy un toast y sabes implementarme",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Soy un toast y sabes implementarme", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -100,7 +102,7 @@ public class MainActivity extends ActionBarActivity {
                 View.OnClickListener myOnClickListener = new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(getApplicationContext(),ResultActivity.class);
+                        Intent i = new Intent(getApplicationContext(), ResultActivity.class);
                         startActivity(i);
                     }
                 };
@@ -161,11 +163,12 @@ public class MainActivity extends ActionBarActivity {
                 Notification noti = mBuilder.build();
 
                 //O patrón de vibración propio
-                long [] vibrate = {500,110,500,110,450,110,200,110,170,40,450,110,200,110,170,40,500};
 
-                noti.vibrate = vibrate;
+                noti.vibrate = new long[]{500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500};
 
-                noti.color = Color.CYAN;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    noti.color = Color.CYAN;
+                }
 
                 noti.flags |= Notification.FLAG_INSISTENT;
                 noti.flags |= Notification.FLAG_NO_CLEAR;
@@ -173,13 +176,6 @@ public class MainActivity extends ActionBarActivity {
                 mNotificationManager.notify(mId, noti);
             }
         });
-
-
-
-
-
-
-
 
 
     }
@@ -193,12 +189,8 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
